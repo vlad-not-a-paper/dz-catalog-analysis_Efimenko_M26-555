@@ -235,3 +235,28 @@ avg_rating = average_rating(movies)
 film_score = {
     movie["title"]: movie["rating"] for movie in movies if movie["rating"] > avg_rating
 }
+
+
+def all_genres(movies):
+    genres_set = set()
+    for movie in movies:
+        genres_set.update(movie["genres"])
+    return genres_set
+
+
+def common_actors(movie1, movie2):
+    actors1 = set()
+    actors2 = set()
+    actors1.update(movie1["actors"])
+    actors2.update(movie2["actors"])
+    return actors1 & actors2
+
+
+def genres_only_in_one(movies_a, movies_b):
+    genre_a = set()
+    genre_b = set()
+    for movie in movies_a:
+        genre_a.update(movie["genres"])
+    for movie in movies_b:
+        genre_b.update(movie["genres"])
+    return genre_a - genre_b
