@@ -138,18 +138,18 @@ def decade_label(year):
 
 
 for movie in movies:
-    if "comedy" in movie['genres']:
+    if "comedy" in movie["genres"]:
         continue
-    print(movie['title'])
+    print(movie["title"])
 
 index = 0
 while index < len(movies):
-    if movies[index]['rating'] > 9:
-        print(movies[index]['title'])
+    if movies[index]["rating"] > 9:
+        print(movies[index]["title"])
         break
     index += 1
 else:
-    print('Шедевров не найдено')
+    print("Шедевров не найдено")
 
 
 def count_long_movies(movies, threshold=120):
@@ -210,3 +210,28 @@ def top_n_by_rating(movies, n=3):
     for i in range(n):
         top.append((rating_title[ratings[i]], ratings[i]))
     return top
+
+
+def count_by_genre(movies):
+    genres = dict()
+    for movie in movies:
+        for genre in movie["genres"]:
+            genres[genre] = genres.get(genre, 0) + 1
+    return genres
+
+
+def actor_filmography(movies):
+    actors = dict()
+    for movie in movies:
+        for actor in movie["actors"]:
+            if actors.get(actor, 0) == 0:
+                actors[actor] = [movie["title"]]
+            else:
+                actors[actor].append(movie["title"])
+    return actors
+
+
+avg_rating = average_rating(movies)
+film_score = {
+    movie["title"]: movie["rating"] for movie in movies if movie["rating"] > avg_rating
+}
