@@ -114,3 +114,39 @@ def catalog_age_stats(movies, current_year=2026):
 def duration_in_hours(minutes):
     recording_format = f"{minutes // 60}ч {minutes % 60}м"
     return recording_format
+
+
+def rating_tier(rating):
+    if rating >= 9:
+        category = "шедевр"
+    elif rating >= 7:
+        category = "хорошо"
+    else:
+        category = "средне" if rating >= 5 else "слабо"
+    return category
+
+
+def decade_label(year):
+    match year:
+        case _ if year > 2020:
+            mark = "новые"
+        case _ if year >= 2015:
+            mark = "недавние"
+        case _:
+            mark = "старые"
+    return mark
+
+
+for movie in movies:
+    if "comedy" in movie['genres']:
+        continue
+    print(movie['title'])
+
+index = 0
+while index < len(movies):
+    if movies[index]['rating'] > 9:
+        print(movies[index]['title'])
+        break
+    index += 1
+else:
+    print('Шедевров не найдено')
