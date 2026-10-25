@@ -301,4 +301,5 @@ def build_report(movies):
     return "\n".join(report)
 
 
-print(build_report(movies))
+if __name__ == "__main__":
+    print(build_report(movies))
